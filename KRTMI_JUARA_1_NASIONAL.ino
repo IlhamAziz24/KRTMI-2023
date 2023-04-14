@@ -37,13 +37,16 @@ Servo myservo3; //-----> Naik Turun
 //=============================================  SET UP  ===================================================
 void setup() {
 
+  //---------  PIN SERVO   --------
   myservo1.attach(A1);
   myservo2.attach(A2);
   myservo3.attach(A3);
-  
-  myservo1.write(116);
-  myservo2.write(180);
-  myservo3.write(100);
+
+  //-----  SUDUT AWAL SERVO ------
+  myservo1.write(0);
+  myservo2.write(0);
+  myservo3.write(0);
+
 
   //ax12a.begin(BaudRate, DirectionPin, &Serial2);
   //ax12a.setEndless(ID, ON);
@@ -90,6 +93,8 @@ void setup() {
       break;
   }
 }
+
+
 
 
 
@@ -160,26 +165,25 @@ void loop()
 //=================================================  SERVO CAPIT  ===========================================================
   else if (ps2x.Button(PSB_L1))
   {
-    Serial.print(" held this hard: ");
-    myservo1.write(116);
-    //move
+    myservo1.write(25);
   }
   else if (ps2x.Button(PSB_L2))
   {
-    Serial.print(" held this hard: ");
-    myservo1.write(25);
+    myservo1.write(120);
   }
 
 //===================================================  SERVO PUTAR  ========================================================
   else if (ps2x.Button(PSB_R1))
   {
-    myservo2.write(0);
+    myservo2.write(25);
   }
   
   else if (ps2x.Button(PSB_R2))
   {
-    myservo2.write(155);
+    myservo2.write(120);
   }
+
+
 
   //BULET
   else if (ps2x.Button(PSB_CIRCLE))
@@ -224,6 +228,9 @@ void loop()
     digitalWrite(motor4pin2, HIGH);
     Serial.print(" KOTAK DIPENCET ");
   }
+
+
+
 
 
 //=============================================== ANALOG KIRI ================================================
@@ -319,6 +326,8 @@ void loop()
   }
 
 
+
+
 //============================================= ANALOG KIRI DIAGONAL ======================================================
   //MAJU KIRI
   else if ((ps2x.Analog(PSS_LY) < 50) && ((ps2x.Analog(PSS_LX) >= 0) && (ps2x.Analog(PSS_LX) <= 50)))
@@ -375,6 +384,8 @@ void loop()
 
 
 
+
+
 //=================================================== PAD BUTTON ==================================================
   //SELECT
   else if (ps2x.Button(PSB_SELECT))
@@ -410,17 +421,18 @@ void loop()
     Serial.println(ps2x.Analog(PSAB_PAD_DOWN), DEC);
   }
 
+
   
 //=======================================================  SERVO AX  ===================================================
   else if ((ps2x.Analog(PSS_RY) < 64) && ((ps2x.Analog(PSS_RX) >= 64) && (ps2x.Analog(PSS_RX) <= 192)))
   {
-    myservo3.write(110);
+    myservo3.write(25);
     //ax12a.ledStatus(ID, OFF);
     //ax12a.turn(ID, RIGHT, 500);
   }
   else if ((ps2x.Analog(PSS_RY) > 192) && ((ps2x.Analog(PSS_RX) >= 64) && (ps2x.Analog(PSS_RX) <= 192)))
   {
-    myservo3.write(75);
+    myservo3.write(120);
     //ax12a.ledStatus(ID, ON);
     //ax12a.turn(ID, LEFT, 500);
   }
@@ -461,6 +473,7 @@ void loop()
   
   delay(20);
 }
+
 
 
 
@@ -519,6 +532,9 @@ void mukan() {
   digitalWrite(motor3pin1, HIGH);
   digitalWrite(motor3pin2, LOW);
 }
+
+
+
 
 //----------------------------------------------  VOID PAD  -----------------------------------------------------
 void maju() {
